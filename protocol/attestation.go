@@ -148,6 +148,7 @@ func (a *AttestationObject) Verify(relyingPartyID string, clientDataHash []byte,
 	for i, param := range credParams {
 		fmt.Printf("   %d. Algorithm: %d\n", i+1, param.Algorithm)
 	}
+	fmt.Println("🟣 log mio: LUNGHEZZA credParams", len(credParams))
 	for _, credParam := range credParams {
 		if int(pk.Algorithm) == int(credParam.Algorithm) {
 			found = true
@@ -157,7 +158,7 @@ func (a *AttestationObject) Verify(relyingPartyID string, clientDataHash []byte,
 	if !found {
 		fmt.Printf("🟣 log mio: pk.Algorithm: %d\n", pk.Algorithm)
 		fmt.Printf("🟣 log mio: pk(dati in arrivo dall'autentichator): %d\n", pk)
-		
+
 		return ErrAttestationFormat.WithInfo("Credential public key algorithm not supported")
 	}
 
