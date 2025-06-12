@@ -143,6 +143,11 @@ func (a *AttestationObject) Verify(relyingPartyID string, clientDataHash []byte,
 		return err
 	}
 	found := false
+	// Log available parameters
+	fmt.Println("🟣 log mio: Available credParams:")
+	for i, param := range credParams {
+		fmt.Printf("   %d. Algorithm: %d\n", i+1, param.Algorithm)
+	}
 	for _, credParam := range credParams {
 		if int(pk.Algorithm) == int(credParam.Algorithm) {
 			found = true
