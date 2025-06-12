@@ -151,6 +151,8 @@ func (a *AttestationObject) Verify(relyingPartyID string, clientDataHash []byte,
 	}
 	if !found {
 		fmt.Printf("🟣 log mio: pk.Algorithm: %d\n", pk.Algorithm)
+		fmt.Printf("🟣 log mio: pk(dati in arrivo dall'autentichator): %d\n", pk)
+		
 		return ErrAttestationFormat.WithInfo("Credential public key algorithm not supported")
 	}
 
