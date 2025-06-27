@@ -374,6 +374,7 @@ func (webauthn *WebAuthn) validateLogin(user User, session SessionData, parsedRe
 	// Handle step 17.
 	credential.Authenticator.UpdateCounter(parsedResponse.Response.AuthenticatorData.Counter)
 	// Check if the BackupEligible flag has changed.
+	webauthn.DebugLog("webauthn.login.validateLogin()", "checking what does the credential struct look like here and how are flags set", "Credential", credential, "flags", credential.Flags, "UserPresent", credential.Flags.UserPresent, "UserVerified", credential.Flags.UserVerified, "BackupEligible", credential.Flags.BackupEligible, "BackupState", credential.Flags.BackupState, "raw", credential.Flags.raw)
 	if credential.Flags.BackupEligible != parsedResponse.Response.AuthenticatorData.Flags.HasBackupEligible() {
 		return nil, protocol.ErrBadRequest.WithDetails("BackupEligible flag inconsistency detected during login validation")
 	}

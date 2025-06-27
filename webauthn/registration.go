@@ -218,7 +218,7 @@ func (webauthn *WebAuthn) FinishRegistration(user User, session SessionData, res
 		"response", response)
 
 	parsedResponse, err := protocol.ParseCredentialCreationResponse(response)
-	webauthn.DebugLog("wbauthn.registration.FinishRegistration()", "Parsing http response",
+	webauthn.DebugLog("webauthn.registration.FinishRegistration()", "Parsing http response",
 		"parsedResponse", parsedResponse)
 	if err != nil {
 		return nil, err
