@@ -161,6 +161,7 @@ func (pcc *ParsedCredentialCreationData) Verify(storedChallenge string, verifyUs
 
 	// We do the above step while parsing and decoding the CredentialCreationResponse
 	// Handle steps 9 through 14 - This verifies the attestation object.
+	LogDebug("protocol.credential.Verify()", "printing all parameters", "relyingPartyID", relyingPartyID, "clientDataHash", clientDataHash, "verifyUser", verifyUser, "mds", mds, "credParams", credParams)
 	if err = pcc.Response.AttestationObject.Verify(relyingPartyID, clientDataHash, verifyUser, mds, credParams); err != nil {
 		return clientDataHash, err
 	}

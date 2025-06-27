@@ -5,6 +5,7 @@ import (
 	"net/url"
 	"time"
 
+	"github.com/go-webauthn/webauthn/internal/logger"
 	"github.com/go-webauthn/webauthn/metadata"
 	"github.com/go-webauthn/webauthn/protocol"
 )
@@ -13,6 +14,13 @@ import (
 func New(config *Config) (*WebAuthn, error) {
 	if err := config.validate(); err != nil {
 		return nil, fmt.Errorf(errFmtConfigValidate, err)
+	}
+
+	// Set up global logger based on config
+	if config.Debug {
+		logger.Enable()
+	} else {
+		logger.Disable()
 	}
 
 	return &WebAuthn{

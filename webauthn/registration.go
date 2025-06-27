@@ -212,7 +212,14 @@ func WithRegistrationRelyingPartyName(name string) RegistrationOption {
 // FinishRegistration takes the response from the authenticator and client and verify the credential against the user's
 // credentials and session data.
 func (webauthn *WebAuthn) FinishRegistration(user User, session SessionData, response *http.Request) (*Credential, error) {
+	webauthn.DebugLog("webauthn.registration.FinishRegistration()", "Processing registration",
+		"user", user,
+		"session", session,
+		"response", response)
+
 	parsedResponse, err := protocol.ParseCredentialCreationResponse(response)
+	webauthn.DebugLog("wbauthn.registration.FinishRegistration()", "Parsing http response",
+		"parsedResponse", parsedResponse)
 	if err != nil {
 		return nil, err
 	}
